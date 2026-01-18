@@ -9,7 +9,7 @@ The format implementations from my [mslicer](https://github.com/connorslade/msli
 ## Installation
 
 First you will need to register the `.goo` and `.ctb` formats on your system.
-Download the XML files in [dist](dist) and [register them](https://unix.stackexchange.com/a/564888) on your system.
+Download the XML files in [plugin/mime](plugin/mime) and [register them](https://unix.stackexchange.com/a/564888) on your system.
 
 Next, download `msla-thumbs.so` from the latest release and copy it to `/usr/lib64/qt6/plugins/kf6/thumbcreator/`.
 If using the Dolphin file browser, you will need to enable showing 'Sliced MSLA previews' in Configure › Interface › Previews.

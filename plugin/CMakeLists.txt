@@ -13,9 +13,9 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 
 find_package(KF6 REQUIRED COMPONENTS KIO)
 kcoreaddons_add_plugin(msla-thumbs
-    SOURCES include/previews/lib.rs.cc src/msla_thumbs.cpp src/image.cpp
+    SOURCES include/preview/lib.rs.cc src/msla_thumbs.cpp src/image.cpp
     INSTALL_NAMESPACE "kf6/thumbcreator"
 )
 target_link_libraries(msla-thumbs
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/libpreviews.a KF6::KIOGui
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/libpreview.a KF6::KIOGui
 )

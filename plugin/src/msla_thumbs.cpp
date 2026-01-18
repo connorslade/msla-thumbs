@@ -3,7 +3,7 @@
 #include <qimage.h>
 
 #include "image.hpp"
-#include "include/previews/lib.rs.h"
+#include "include/preview/lib.rs.h"
 #include "msla_thumbs.hpp"
 
 K_PLUGIN_CLASS_WITH_JSON(MslaThumbs, "../thumbnail.json")
