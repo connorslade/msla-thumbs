@@ -1,0 +1,14 @@
+[package]
+name = "previews"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+cxx = "1.0.192"
+
+common = { git = "https://github.com/connorslade/mslicer" }
+ctb_format = { git = "https://github.com/connorslade/mslicer" }
+goo_format = { git = "https://github.com/connorslade/mslicer" }
+
+[build-dependencies]
+cxx-build = "1.0.192"

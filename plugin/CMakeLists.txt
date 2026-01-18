@@ -42,10 +42,13 @@ ecm_set_disabled_deprecation_versions(
     KF 5.240
 )
 
-add_definitions(-DTRANSLATION_DOMAIN=\"mslathumbs\")
+add_definitions(-DTRANSLATION_DOMAIN=\"msla-thumbs\")
 
-kcoreaddons_add_plugin(mslathumbs SOURCES src/msla_thumbs.cpp INSTALL_NAMESPACE "kf6/thumbcreator")
-target_link_libraries(mslathumbs
+kcoreaddons_add_plugin(msla-thumbs
+    SOURCES include/previews/lib.rs.cc src/msla_thumbs.cpp
+    INSTALL_NAMESPACE "kf6/thumbcreator"
+)
+target_link_libraries(msla-thumbs
     KF6::KIOGui
     Qt::Gui
 )

@@ -1,0 +1,72 @@
+use std::fs;
+
+use common::serde::SliceDeserializer;
+use ctb_format::File as CtbFile;
+use goo_format::File as GooFile;
+
+#[cxx::bridge]
+mod ffi {
+    extern "Rust" {
+        type Image;
+        fn width(&self) -> u32;
+        fn data(&self) -> &[u8];
+
+        fn extract_preview(path: String) -> Box<Image>;
+    }
+}
+
+struct Image {
+    width: u32,
+    data: Vec<u8>,
+}
+
+fn extract_preview_inner(path: String) -> Option<Image> {
+    let (_, ext) = path.rsplit_once(".")?;
+    let data = fs::read(&path).unwrap();
+
+    match ext {
+        "ctb" => {
+            let file = CtbFile::deserialize(&mut SliceDeserializer::new(&data)).ok()?;
+            let mut _image = Image::empty(file.large_preview.size().x);
+            None
+        }
+        "goo" => {
+            let file = GooFile::deserialize(&data).ok()?;
+            let mut image = Image::empty(290);
+            for pixel in file.header.big_preview.inner_data() {
+                let red = ((pixel >> 11) & 0x1F) * 255 / 31;
+                let green = ((pixel >> 5) & 0x3F) * 255 / 63;
+                let blue = (pixel & 0x1F) * 255 / 31;
+                image.data.extend([red, green, blue].map(|x| x as u8));
+            }
+
+            Some(image)
+        }
+        _ => None,
+    }
+}
+
+fn extract_preview(path: String) -> Box<Image> {
+    Box::new(extract_preview_inner(path).unwrap_or(Image::failed()))
+}
+
+impl Image {
+    fn empty(width: u32) -> Self {
+        Self {
+            width,
+            data: Vec::new(),
+        }
+    }
+
+    fn failed() -> Self {
+        Self::empty(0)
+    }
+
+    fn width(&self) -> u32 {
+        self.width
+    }
+
+    fn data(&self) -> &[u8] {
+        &self.data
+    }
+}
