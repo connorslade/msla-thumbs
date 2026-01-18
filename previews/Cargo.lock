@@ -249,7 +249,7 @@ checksum = "b05b61dc5112cbb17e4b6cd61790d9845d13888356391624cbe7e41efeac1e75"
 [[package]]
 name = "common"
 version = "0.1.0"
-source = "git+https://github.com/connorslade/mslicer#18d1dc913ccd1e54bc5b35df79cdf0131022eaba"
+source = "git+https://github.com/connorslade/mslicer#1a57a958f2f2aa2111a03ec7d418329e1290455f"
 dependencies = [
  "nalgebra",
  "rand",
@@ -302,7 +302,7 @@ dependencies = [
 [[package]]
 name = "ctb_format"
 version = "0.1.0"
-source = "git+https://github.com/connorslade/mslicer#18d1dc913ccd1e54bc5b35df79cdf0131022eaba"
+source = "git+https://github.com/connorslade/mslicer#1a57a958f2f2aa2111a03ec7d418329e1290455f"
 dependencies = [
  "aes",
  "anyhow",
@@ -575,7 +575,7 @@ checksum = "19fc433e8437a212d1b6f1e68c7824af3aed907da60afa994e7f542d18d12aa9"
 [[package]]
 name = "goo_format"
 version = "0.1.0"
-source = "git+https://github.com/connorslade/mslicer#18d1dc913ccd1e54bc5b35df79cdf0131022eaba"
+source = "git+https://github.com/connorslade/mslicer#1a57a958f2f2aa2111a03ec7d418329e1290455f"
 dependencies = [
  "anyhow",
  "chrono",

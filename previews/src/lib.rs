@@ -23,15 +23,20 @@ pub struct Image {
 fn extract_preview_inner(path: String) -> Option<Image> {
     let (_, ext) = path.rsplit_once(".")?;
     let data = fs::read(&path).unwrap();
+    let mut des = SliceDeserializer::new(&data);
 
     match ext {
         "ctb" => {
-            let file = CtbFile::deserialize(&mut SliceDeserializer::new(&data)).ok()?;
-            let mut _image = Image::empty(file.large_preview.size().x);
-            None
+            let file = CtbFile::deserialize(&mut des).ok()?;
+            let mut image = Image::empty(file.large_preview.size().x);
+            image.data = (file.large_preview.inner_data().iter())
+                .flat_map(|x| x.as_slice())
+                .copied()
+                .collect();
+            Some(image)
         }
         "goo" => {
-            let file = GooFile::deserialize(&data).ok()?;
+            let file = GooFile::deserialize(&mut des).ok()?;
             let mut image = Image::empty(290);
             for pixel in file.header.big_preview.inner_data() {
                 let red = ((pixel >> 11) & 0x1F) * 255 / 31;

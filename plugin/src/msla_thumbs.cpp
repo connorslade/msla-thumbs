@@ -22,7 +22,6 @@ KIO::ThumbnailResult MslaThumbs::create(const KIO::ThumbnailRequest &request) {
   auto height = image->data().length() / width / 3;
   auto data = image->data().data();
   QImage img(data, width, height, width * 3, QImage::Format_RGB888);
-  img = img.scaled(request.targetSize());
 
   return KIO::ThumbnailResult::pass(img);
 }
