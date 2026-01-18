@@ -8,7 +8,7 @@ use goo_format::File as GooFile;
 mod ffi {
     extern "Rust" {
         type Image;
-        fn width(&self) -> u32;
+        fn size(&self) -> [u32; 2];
         fn data(&self) -> &[u8];
 
         fn extract_preview(path: String) -> Box<Image>;
@@ -44,7 +44,6 @@ fn extract_preview_inner(path: String) -> Option<Image> {
                 let blue = (pixel & 0x1F) * 255 / 31;
                 image.data.extend([red, green, blue].map(|x| x as u8));
             }
-
             Some(image)
         }
         _ => None,
@@ -67,8 +66,8 @@ impl Image {
         Self::empty(0)
     }
 
-    pub fn width(&self) -> u32 {
-        self.width
+    pub fn size(&self) -> [u32; 2] {
+        [self.width, self.data.len() as u32 / self.width / 3]
     }
 
     pub fn data(&self) -> &[u8] {

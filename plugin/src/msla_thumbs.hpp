@@ -8,3 +8,5 @@ public:
   ~MslaThumbs() override;
   KIO::ThumbnailResult create(const KIO::ThumbnailRequest &request) override;
 };
+
+void removeBackground(QImage &img);

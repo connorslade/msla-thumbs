@@ -15,15 +15,14 @@ KIO::ThumbnailResult MslaThumbs::create(const KIO::ThumbnailRequest &request) {
   auto path = request.url().toLocalFile();
   auto image = extract_preview(path.toStdString());
 
-  auto width = image->width();
+  auto [width, height] = image->size();
   if (!width)
     return KIO::ThumbnailResult::fail();
 
-  auto height = image->data().length() / width / 3;
   auto data = image->data().data();
   QImage img(data, width, height, width * 3, QImage::Format_RGB888);
 
-  return KIO::ThumbnailResult::pass(img);
+  return KIO::ThumbnailResult::pass(img.copy());
 }
 
 #include "msla_thumbs.moc"
