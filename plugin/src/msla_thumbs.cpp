@@ -2,6 +2,7 @@
 #include <QImage>
 #include <qimage.h>
 
+#include "image.hpp"
 #include "include/previews/lib.rs.h"
 #include "msla_thumbs.hpp"
 
@@ -21,8 +22,10 @@ KIO::ThumbnailResult MslaThumbs::create(const KIO::ThumbnailRequest &request) {
 
   auto data = image->data().data();
   QImage img(data, width, height, width * 3, QImage::Format_RGB888);
+  img = img.convertToFormat(QImage::Format_RGBA8888);
+  removeBackground(img);
 
-  return KIO::ThumbnailResult::pass(img.copy());
+  return KIO::ThumbnailResult::pass(img);
 }
 
 #include "msla_thumbs.moc"
