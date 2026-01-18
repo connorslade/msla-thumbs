@@ -15,7 +15,7 @@ mod ffi {
     }
 }
 
-struct Image {
+pub struct Image {
     width: u32,
     data: Vec<u8>,
 }
@@ -46,7 +46,7 @@ fn extract_preview_inner(path: String) -> Option<Image> {
     }
 }
 
-fn extract_preview(path: String) -> Box<Image> {
+pub fn extract_preview(path: String) -> Box<Image> {
     Box::new(extract_preview_inner(path).unwrap_or(Image::failed()))
 }
 
@@ -62,11 +62,11 @@ impl Image {
         Self::empty(0)
     }
 
-    fn width(&self) -> u32 {
+    pub fn width(&self) -> u32 {
         self.width
     }
 
-    fn data(&self) -> &[u8] {
+    pub fn data(&self) -> &[u8] {
         &self.data
     }
 }
