@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
   <mime-type type="application/vnd.elegoo.goo">
-    <comment>The Elegoo GOO format.</comment>
+    <comment>Elegoo GOO</comment>
     <glob pattern="*.goo" />
   </mime-type>
 </mime-info>

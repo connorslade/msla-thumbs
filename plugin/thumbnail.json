@@ -2,7 +2,7 @@
   "CacheThumbnail": true,
   "KPlugin": {
     "MimeTypes": ["application/vnd.chitubox.ctb", "application/vnd.elegoo.goo"],
-    "Name": "Sliced MSLA Preview",
+    "Name": "Sliced MSLA previews",
     "ServiceTypes": ["ThumbCreator"]
   }
 }
