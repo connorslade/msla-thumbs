@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+  <mime-type type="application/vnd.chitubox.ctb">
+    <comment>The Chitubox CTB format.</comment>
+    <glob pattern="*.ctb" />
+  </mime-type>
+</mime-info>
