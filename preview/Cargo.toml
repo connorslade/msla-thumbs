@@ -12,6 +12,7 @@ cxx = "1.0.192"
 common = { git = "https://github.com/connorslade/mslicer" }
 ctb_format = { git = "https://github.com/connorslade/mslicer" }
 goo_format = { git = "https://github.com/connorslade/mslicer" }
+nanodlp_format = { git = "https://github.com/connorslade/mslicer" }
 
 [build-dependencies]
 cxx-build = "1.0.192"

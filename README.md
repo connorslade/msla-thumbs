@@ -1,6 +1,6 @@
 # msla-thumbs
 
-A KDE plugin that adds thumbnail support for the `.goo` and `.ctb` sliced MSLA formats.
+A KDE plugin that adds thumbnail support for the `.goo`, `.ctb`, and `.nanodlp` sliced MSLA formats.
 It just shows the embedded preview images.
 The format implementations from my [mslicer](https://github.com/connorslade/mslicer) project are used.
 
@@ -8,7 +8,7 @@ The format implementations from my [mslicer](https://github.com/connorslade/msli
 
 ## Installation
 
-First you will need to register the `.goo` and `.ctb` formats on your system.
+First you will need to register the `.goo`, `.ctb`, and `.nanodlp` formats on your system.
 Download the XML files in [plugin/mime](plugin/mime) and [register them](https://unix.stackexchange.com/a/564888) on your system.
 
 Next, download `msla-thumbs.so` from the latest release and copy it to `/usr/lib64/qt6/plugins/kf6/thumbcreator/`.

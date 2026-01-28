@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+  <mime-type type="application/vnd.nano3d.nanodlp">
+    <comment>Nano3D NanoDLP</comment>
+    <glob pattern="*.nanodlp" />
+  </mime-type>
+</mime-info>

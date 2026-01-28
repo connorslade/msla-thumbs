@@ -1,8 +1,9 @@
-use std::fs;
+use std::{fs, io::Cursor};
 
 use common::serde::SliceDeserializer;
 use ctb_format::File as CtbFile;
 use goo_format::File as GooFile;
+use nanodlp_format::File as NanoDlpFile;
 
 #[cxx::bridge]
 mod ffi {
@@ -23,11 +24,10 @@ pub struct Image {
 fn extract_preview_inner(path: String) -> Option<Image> {
     let (_, ext) = path.rsplit_once(".")?;
     let data = fs::read(&path).unwrap();
-    let mut des = SliceDeserializer::new(&data);
 
     match ext {
         "ctb" => {
-            let file = CtbFile::deserialize(&mut des).ok()?;
+            let file = CtbFile::deserialize(&mut SliceDeserializer::new(&data)).ok()?;
             let mut image = Image::empty(file.large_preview.size().x);
             image.data = (file.large_preview.inner_data().iter())
                 .flat_map(|x| x.as_slice())
@@ -36,7 +36,7 @@ fn extract_preview_inner(path: String) -> Option<Image> {
             Some(image)
         }
         "goo" => {
-            let file = GooFile::deserialize(&mut des).ok()?;
+            let file = GooFile::deserialize(&mut SliceDeserializer::new(&data)).ok()?;
             let mut image = Image::empty(290);
             for pixel in file.header.big_preview.inner_data() {
                 let red = ((pixel >> 11) & 0x1F) * 255 / 31;
@@ -45,6 +45,13 @@ fn extract_preview_inner(path: String) -> Option<Image> {
                 image.data.extend([red, green, blue].map(|x| x as u8));
             }
             Some(image)
+        }
+        "nanodlp" => {
+            let file = NanoDlpFile::deserialize(Cursor::new(data)).ok()?;
+            Some(Image {
+                width: file.preview.width(),
+                data: file.preview.to_rgb8().into_raw(),
+            })
         }
         _ => None,
     }
